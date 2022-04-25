@@ -72,20 +72,20 @@ async def chat(message: types.Message):
 
 @dp.message_handler(commands='list', state='*', )
 @dp.throttled(rate=5)
-async def mail(message: types.Message):
+async def list_of_members(message: types.Message):
     if message.from_user.id in ADMINS:
         async with create_session() as sess:
-            result = await sess.execute(select(User.user_id))
+            result = await sess.execute(select(User))
             users = result.scalars().all()
         msg = ''
         k = 1
         for user in users:
             msg += f"{k}. {user.name} - {user.email}"
             if user.username:
-                msg += " - " + user.username
+                msg += " - @" + user.username
             k += 1
             await asyncio.sleep(0.1)
-            await bot.send_message(chat_id=user, text=msg)
+            await message.answer(text=msg)
 
 
 @dp.message_handler(commands='mail', state='*')
