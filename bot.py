@@ -113,7 +113,7 @@ async def start(message: types.Message):
 Я занимаюсь оповещением о наших мероприятиях, а также регистрацией участников.
 ❗️Обязательно проходи регистрацию , а иначе тебя не пустят на мероприятие❗️"""
         keyboard = InlineKeyboardMarkup()
-        keyboard.add(InlineKeyboardButton("Условия", url="telegra.ph"))
+        keyboard.add(InlineKeyboardButton("Условия", url=AGREEMENT_URL))
         keyboard.add(InlineKeyboardButton("Принять условия", callback_data="agree"))
 
         await Reg.agreement.set()
