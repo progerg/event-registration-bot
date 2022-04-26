@@ -83,9 +83,9 @@ async def list_of_members(message: types.Message):
             msg += f"{k}. {user.name} - {user.email}"
             if user.username:
                 msg += " - @" + user.username
+            msg += "\n"
             k += 1
-            await asyncio.sleep(0.1)
-            await message.answer(text=msg)
+        await message.answer(text=msg)
 
 
 @dp.message_handler(commands='mail', state='*')
